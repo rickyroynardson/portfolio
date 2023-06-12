@@ -1,6 +1,8 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Providers from "./providers";
+import Link from "next/link";
+import { ThemeButton } from "@/components/Header/ThemeButton";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -19,7 +21,23 @@ export default function RootLayout({
       <body
         className={`${inter.variable} font-sans bg-white dark:bg-neutral-900`}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <header className="max-w-5xl mx-auto relative flex justify-between lg:justify-center my-4 px-4 lg:px-0">
+            <ul className="bg-neutral-800 outline-neutral-700 outline-1 hover:outline w-fit rounded-full flex gap-6 px-4 py-2 text-xs">
+              <li>
+                <Link href="/">Home</Link>
+              </li>
+              <li>
+                <Link href="/">About</Link>
+              </li>
+              <li>
+                <Link href="/">Contact</Link>
+              </li>
+            </ul>
+            <ThemeButton />
+          </header>
+          {children}
+        </Providers>
       </body>
     </html>
   );
