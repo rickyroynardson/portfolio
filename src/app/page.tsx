@@ -37,7 +37,11 @@ export default function HomePage() {
           <ul className="flex items-center justify-center lg:justify-start mt-5 lg:mt-7 gap-4 text-neutral-500 dark:text-neutral-400">
             {socials.map((social, index) => (
               <li key={index}>
-                <Link href={social.url} target="_blank">
+                <Link
+                  href={social.url}
+                  target="_blank"
+                  aria-label={social.name}
+                >
                   {renderSocialIcon(social.name)}
                 </Link>
               </li>

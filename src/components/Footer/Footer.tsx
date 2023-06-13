@@ -32,6 +32,7 @@ export const Footer = () => {
         <button
           onClick={scrollToTop}
           className="bg-white dark:bg-neutral-800 outline-neutral-200 dark:outline-neutral-700 outline-1 hover:outline-2 outline rounded-full p-2 mx-4 absolute right-0 top-1/2 -translate-y-1/2 text-neutral-700 dark:text-white"
+          aria-label="Scroll to top"
         >
           <FiArrowUp />
         </button>
