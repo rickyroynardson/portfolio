@@ -1,6 +1,8 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Providers from "./providers";
+import { Header } from "@/components/Header/Header";
+import { Layout } from "@/components/Layout/Layout";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -19,7 +21,12 @@ export default function RootLayout({
       <body
         className={`${inter.variable} font-sans bg-white dark:bg-neutral-900`}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <div className="min-h-screen flex flex-col">
+            <Header />
+            <Layout>{children}</Layout>
+          </div>
+        </Providers>
       </body>
     </html>
   );
