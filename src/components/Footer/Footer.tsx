@@ -11,21 +11,21 @@ export const Footer = () => {
 
   return (
     <footer className="border-t-2 border-neutral-200 dark:border-neutral-700">
-      <div className="relative max-w-5xl mx-auto px-4 py-6 lg:py-8">
-        <div className="space-y-1">
+      <div className="relative max-w-5xl mx-auto px-4 py-6 sm:py-8 lg:py-10">
+        <div className="space-y-1 lg:space-y-2">
           <ul className="flex gap-3">
             {navigations.map((navigation, index) => (
               <li key={index}>
                 <Link
                   href={navigation.path}
-                  className="text-sm hover:text-blue-600 hover:dark:text-blue-400"
+                  className="text-sm text-neutral-800 dark:text-neutral-300 hover:text-blue-600 hover:dark:text-blue-400"
                 >
                   /{navigation.name.toLowerCase()}
                 </Link>
               </li>
             ))}
           </ul>
-          <p className="text-sm dark:text-neutral-200">
+          <p className="text-sm text-neutral-800 dark:text-neutral-300">
             &copy; 2023 Roooy. All rights reserved
           </p>
         </div>
