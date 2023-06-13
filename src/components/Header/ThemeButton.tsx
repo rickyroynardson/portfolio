@@ -13,7 +13,11 @@ export const ThemeButton = () => {
   };
 
   const renderIcon = () => {
-    return theme === "dark" ? <FiSun /> : <FiMoon />;
+    return theme === "dark" ? (
+      <FiMoon className="text-neutral-200" />
+    ) : (
+      <FiSun className="text-blue-600" />
+    );
   };
 
   useEffect(() => {
@@ -27,7 +31,7 @@ export const ThemeButton = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="bg-neutral-800 outline-neutral-700 outline-1 hover:outline rounded-full p-2 lg:absolute lg:right-0"
+      className="bg-white dark:bg-neutral-800 outline-neutral-200 dark:outline-neutral-700 outline-1 hover:outline-2 outline rounded-full p-2 lg:absolute lg:right-0 text-neutral-700 dark:text-white"
     >
       {renderIcon()}
     </button>
