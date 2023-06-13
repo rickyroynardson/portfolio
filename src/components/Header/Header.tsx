@@ -13,7 +13,7 @@ export const Header = () => {
 
   return (
     <header className="w-full h-fit max-w-5xl mx-auto relative flex justify-between lg:justify-center items-center my-4 px-4 lg:px-0">
-      <ul className="bg-white dark:bg-neutral-800 outline-neutral-200 dark:outline-neutral-700 outline-1 hover:outline-2 outline w-fit rounded-full flex gap-6 px-4 py-2 font-semibold text-xs md:text-sm text-neutral-700 dark:text-white">
+      <ul className="bg-white dark:bg-neutral-800 outline-neutral-200 dark:outline-neutral-700 outline-1 hover:outline-2 outline w-fit rounded-full flex gap-6 px-4 py-2 font-semibold text-xs md:text-sm text-neutral-800 dark:text-neutral-100">
         {navigations.map((navigation, index) => (
           <li key={index}>
             <Link
