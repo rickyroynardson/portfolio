@@ -1,18 +1,22 @@
 [
   {
     "name": "Twitter",
-    "url": "https://www.twitter.com/rickyroynardson"
+    "username": "@rickyroynardson",
+    "url": "https://twitter.com/rickyroynardson"
   },
   {
     "name": "Instagram",
-    "url": "https://www.instagram.com/rickyroyn_"
+    "username": "@rickyroyn_",
+    "url": "https://instagram.com/rickyroyn_"
   },
   {
     "name": "Github",
-    "url": "https://www.github.com/rickyroynardson"
+    "username": "rickyroynardson",
+    "url": "https://github.com/rickyroynardson"
   },
   {
     "name": "LinkedIn",
-    "url": "https://www.linkedin.com/in/rickyroynardson/"
+    "username": "rickyroynardson",
+    "url": "https://linkedin.com/in/rickyroynardson/"
   }
 ]
