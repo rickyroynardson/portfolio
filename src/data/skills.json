@@ -1,0 +1,56 @@
+[
+    {
+        "category": "Languages",
+        "skills": [
+            {
+                "name": "HTML & CSS"
+            },
+            {
+                "name": "PHP"
+            },
+            {
+                "name": "JavaScript"
+            },
+            {
+                "name": "TypeScript"
+            }
+        ]
+    },
+    {
+        "category": "Frontend",
+        "skills": [
+            {
+                "name": "React.js"
+            },
+            {
+                "name": "Next.js"
+            },
+            {
+                "name": "Tailwind CSS"
+            }
+        ]
+    },
+    {
+        "category": "Backend",
+        "skills": [
+            {
+                "name": "MySQL"
+            },
+            {
+                "name": "PostgreSQL"
+            },
+            {
+                "name": "Laravel"
+            },
+            {
+                "name": "Node.js"
+            },
+            {
+                "name": "ExpressJS"
+            },
+            {
+                "name": "MongoDB"
+            }
+        ]
+    }
+]
