@@ -30,7 +30,7 @@ export default function ContactPage() {
         </p>
         <Link
           href="mailto:rickyroynardson@gmail.com"
-          className="group text-neutral-900 dark:text-neutral-200"
+          className="group text-neutral-900 dark:text-neutral-200 block w-fit"
         >
           <span className="flex items-center gap-3">
             <FiMail className="w-5 h-5" />
@@ -48,7 +48,7 @@ export default function ContactPage() {
               <Link
                 href={social.url}
                 target="_blank"
-                className="group text-neutral-900 dark:text-neutral-200"
+                className="group text-neutral-900 dark:text-neutral-200 block w-fit"
               >
                 <span className="flex items-center gap-3">
                   {renderSocialIcon(social.name)}
