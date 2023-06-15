@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Tu-Du",
+        "description": "Task/project management website with personal or team task/project feature.",
+        "image": "/projects/tudu.webp",
+        "tools": ["Laravel", "ReactJS", "Tailwind CSS", "MySQL"],
+        "github": "-",
+        "demo": "-"
+    },
+    {
+        "name": "TOPTENLOG",
+        "description": "A company profile website for TOPTENLOG company in Batam.",
+        "image": "/projects/toptenlog.webp",
+        "tools": ["ReactJS", "Tailwind CSS"],
+        "github": "-",
+        "demo": "-"
+    },
+    {
+        "name": "Sepekan",
+        "description": "Inventory management website (location, item list, qrcode, loan item list). Internship project at PT. Pundi Mas Berjaya.",
+        "image": "/projects/sepekan.webp",
+        "tools": ["Codeigniter", "Bootstrap", "MySQL"],
+        "github": "-",
+        "demo": "-"
+    }
+]

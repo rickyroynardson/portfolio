@@ -21,7 +21,7 @@ export const Skillset = () => {
                   key={index}
                   className="text-neutral-700 dark:text-neutral-400"
                 >
-                  {skill.name}
+                  {skill}
                 </p>
               ))}
             </div>

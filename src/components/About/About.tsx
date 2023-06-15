@@ -6,7 +6,14 @@ export const About = () => {
     <div className="flex flex-col md:flex-row-reverse md:gap-12 lg:gap-16 px-4">
       <div className="self-center">
         <div className="relative rotate-3 aspect-square w-36 sm:w-40 md:w-48 rounded-lg overflow-hidden outline outline-4 outline-neutral-200 dark:outline-neutral-700 shadow">
-          <Image src="/me2.webp" alt="me making some bug" fill />
+          <Image
+            src="/me2.webp"
+            alt="me making some bug"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full h-full"
+          />
         </div>
       </div>
       <div className="grow">

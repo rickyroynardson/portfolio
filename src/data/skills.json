@@ -1,56 +1,14 @@
 [
     {
         "category": "Languages",
-        "skills": [
-            {
-                "name": "HTML & CSS"
-            },
-            {
-                "name": "PHP"
-            },
-            {
-                "name": "JavaScript"
-            },
-            {
-                "name": "TypeScript"
-            }
-        ]
+        "skills": ["HTML & CSS", "PHP", "JavaScript", "TypeScript"]
     },
     {
         "category": "Frontend",
-        "skills": [
-            {
-                "name": "React.js"
-            },
-            {
-                "name": "Next.js"
-            },
-            {
-                "name": "Tailwind CSS"
-            }
-        ]
+        "skills": ["React.js", "Next.js", "Tailwind CSS"]
     },
     {
         "category": "Backend",
-        "skills": [
-            {
-                "name": "MySQL"
-            },
-            {
-                "name": "PostgreSQL"
-            },
-            {
-                "name": "Laravel"
-            },
-            {
-                "name": "Node.js"
-            },
-            {
-                "name": "ExpressJS"
-            },
-            {
-                "name": "MongoDB"
-            }
-        ]
+        "skills": ["MySQL", "PostgreSQL", "Laravel", "Node.js", "ExpressJS", "MongoDB"]
     }
 ]
