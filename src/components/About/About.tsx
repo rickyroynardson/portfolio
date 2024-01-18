@@ -21,11 +21,12 @@ export const About = () => {
           About me
         </h1>
         <p className="text-neutral-600 dark:text-neutral-400 text-justify mt-1 lg:mt-2">
-          Hello, my name is Ricky Roy Nardson. I live in Batam City, Riau
-          Islands, Indonesia. I was someone who has been interested in the world
-          of computers and technology. I started learning programming in 2019.
-          Since then, i gradually improve my skill until now and will keep
-          improving in the future and always explore new things.
+          Hi, I am a college student majoring in Information Systems, a lifetime
+          learner, and a web developer based in Indonesia. I was interested in
+          the world of computers and technology. I enjoy creating things that
+          live on the internet, whether websites, applications, or anything in
+          between. I love to learn new things, write some code, create some
+          bugs, and play video games.
         </p>
         <p className="text-neutral-600 dark:text-neutral-400 text-justify mt-1 lg:mt-2">
           I love to learn new things, write some code, creating some bugs, and
