@@ -9,9 +9,9 @@ export default function ProjectsPage() {
     <Layout className="py-10">
       <div className="px-4 space-y-5">
         <div>
-          <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl text-neutral-800 dark:text-neutral-100">
+          <h2 className="font-bold text-3xl md:text-4xl lg:text-5xl text-neutral-800 dark:text-neutral-100">
             Latest projects
-          </h1>
+          </h2>
           <p className="text-neutral-600 dark:text-neutral-400 mt-1 lg:mt-2 lg:text-lg">
             Some code and bugs I&lsquo;ve made trying to put my dent in the
             universe.

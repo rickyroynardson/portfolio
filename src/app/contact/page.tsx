@@ -22,9 +22,9 @@ export default function ContactPage() {
   return (
     <Layout className="py-10">
       <div className="px-4">
-        <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl text-neutral-800 dark:text-neutral-100">
+        <h2 className="font-bold text-3xl md:text-4xl lg:text-5xl text-neutral-800 dark:text-neutral-100">
           Contact me
-        </h1>
+        </h2>
         <p className="text-neutral-600 dark:text-neutral-400 mt-1 lg:mt-2">
           You can reach me out via email at:
         </p>

@@ -17,9 +17,9 @@ export const About = () => {
         </div>
       </div>
       <div className="grow">
-        <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl text-neutral-800 dark:text-neutral-100">
+        <h2 className="font-bold text-3xl md:text-4xl lg:text-5xl text-neutral-800 dark:text-neutral-100">
           About me
-        </h1>
+        </h2>
         <p className="text-neutral-600 dark:text-neutral-400 text-justify mt-1 lg:mt-2">
           Hi, I am a college student majoring in Information Systems, a lifetime
           learner, and a web developer based in Indonesia. I was interested in
