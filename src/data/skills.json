@@ -1,14 +1,14 @@
 [
     {
         "category": "Languages",
-        "skills": ["HTML & CSS", "PHP", "JavaScript", "TypeScript"]
+        "skills": ["HTML & CSS", "JavaScript", "TypeScript"]
     },
     {
         "category": "Frontend",
-        "skills": ["React.js", "Next.js", "Tailwind CSS"]
+        "skills": ["React.js", "Next.js", "React Query", "Tailwind CSS"]
     },
     {
         "category": "Backend",
-        "skills": ["MySQL", "PostgreSQL", "Laravel", "Node.js", "ExpressJS", "MongoDB"]
+        "skills": ["MySQL", "PostgreSQL", "Node.js", "ExpressJS", "Nest.js", "MongoDB", "Prisma"]
     }
 ]
