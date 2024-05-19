@@ -26,6 +26,9 @@ export const Experience = () => {
             <p className="text-sm text-neutral-500 dark:text-neutral-400">
               {experience.year}
             </p>
+            <p className="text-sm text-justify text-neutral-800 dark:text-neutral-200">
+              {experience.description}
+            </p>
           </div>
         ))}
       </div>

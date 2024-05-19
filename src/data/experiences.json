@@ -1,7 +1,8 @@
 [
-    {
-        "company": "PT. Pundi Mas Berjaya",
-        "department": "Web Developer (Internship)",
-        "year": "2020 - 2021"
-    }
+  {
+    "company": "PT. Pundi Mas Berjaya",
+    "department": "Web Developer (Internship)",
+    "year": "2020 - 2021",
+    "description": "Responsible for website development and the creation of internal tools, as well as assisting the QA team in system testing and development. Proficient in developing client websites using HTML, CSS, JavaScript, and PHP (Laravel)."
+  }
 ]

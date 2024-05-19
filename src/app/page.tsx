@@ -35,11 +35,11 @@ export default function HomePage() {
         </div>
         <div className="text-center lg:text-left">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl text-neutral-800 dark:text-neutral-100 font-bold">
-            Lifetime learner, college student, and web developer.
+            Lifetime learner, college student, and software engineer.
           </h1>
           <p className="text-neutral-600 dark:text-neutral-400 md:text-lg mt-1 lg:mt-2">
-            I’m Ricky Roy Nardson, a lifetime learner, college student, and web
-            developer based in Kepulauan Riau, Indonesia.
+            I’m Ricky Roy Nardson, a lifetime learner, college student, and
+            software engineer based in Riau Islands, Indonesia.
           </p>
           <ul className="flex items-center justify-center lg:justify-start mt-5 lg:mt-7 gap-4 text-neutral-500 dark:text-neutral-400">
             {socials.map((social, index) => (

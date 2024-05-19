@@ -26,7 +26,7 @@ export const Footer = () => {
             ))}
           </ul>
           <p className="text-sm text-neutral-800 dark:text-neutral-300">
-            &copy; 2023 Roooy. All rights reserved
+            &copy; 2024 Roooy. All rights reserved
           </p>
         </div>
         <button

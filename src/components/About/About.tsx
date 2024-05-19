@@ -21,16 +21,14 @@ export const About = () => {
           About me
         </h2>
         <p className="text-neutral-600 dark:text-neutral-400 text-justify mt-1 lg:mt-2">
-          Hi, I am a college student majoring in Information Systems, a lifetime
-          learner, and a web developer based in Indonesia. I was interested in
-          the world of computers and technology. I enjoy creating things that
-          live on the internet, whether websites, applications, or anything in
-          between. I love to learn new things, write some code, create some
-          bugs, and play video games.
-        </p>
-        <p className="text-neutral-600 dark:text-neutral-400 text-justify mt-1 lg:mt-2">
-          I love to learn new things, write some code, creating some bugs, and
-          play video games.
+          Hi, I am a college student majoring in Information Systems with 2+
+          years of hands-on experience in developing software products on
+          various platforms, having interests in web development, and being
+          familiar with modern front-end and back-end frameworks such as Next.js
+          (React.js) and Node.js using JavaScript or TypeScript. Always
+          passionate and open-minded to learn about new technologies. Applied
+          software development life cycle, version control, and relevant
+          frameworks to solve user and client needs.
         </p>
       </div>
     </div>
