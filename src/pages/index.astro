@@ -1,0 +1,39 @@
+---
+import LinkExternal from "../components/LinkExternal.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Ricky Roy Nardson | Portfolio">
+  <section
+    class="w-full h-screen flex items-center justify-center bg-stone-100"
+  >
+    <div class="p-4 sm:p-0">
+      <p class="text-4xl sm:text-6xl md:text-7xl font-bold text-stone-950">
+        Hi, I'm Ricky 👋
+      </p>
+      <p class="text-md sm:text-lg md:text-2xl font-medium text-stone-800">
+        I'm a software engineer.
+      </p>
+      <div class="mt-4 flex flex-wrap gap-4 items-center">
+        <LinkExternal label="github" url="https://github.com/rickyroynardson" />
+        <LinkExternal
+          label="linkedin"
+          url="https://linkedin.com/in/rickyroynardson/"
+        />
+        <LinkExternal
+          label="instagram"
+          url="https://instagram.com/rickyroyn_"
+        />
+        <LinkExternal label="twitter" url="https://x.com/rickyroynardson" />
+        <LinkExternal label="email" url="mailto:rickyroynardson@gmail.com" />
+      </div>
+      <div class="mt-6 sm:mt-10 text-center">
+        <a href="#about" class="group text-xs sm:text-sm text-stone-600"
+          >read more about me? <span class="group-hover:text-blue-500"
+            >scroll down</span
+          ></a
+        >
+      </div>
+    </div>
+  </section>
+</Layout>

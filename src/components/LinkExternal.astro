@@ -1,0 +1,15 @@
+---
+import { FaArrowUpRightFromSquare } from "react-icons/fa6";
+
+const { label, url } = Astro.props;
+---
+
+<a
+  href={url}
+  class="inline-block text-sm sm:text-base md:text-lg text-blue-500"
+  target="_blank"
+>
+  <span class="flex gap-1"
+    >{label} <FaArrowUpRightFromSquare className="size-2 sm:size-2.5" /></span
+  ></a
+>
