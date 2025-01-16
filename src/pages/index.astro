@@ -1,5 +1,10 @@
 ---
+import Image from "astro/components/Image.astro";
+import meImage from "../assets/me.webp";
+import EducationCard from "../components/EducationCard.astro";
+import ExperienceCard from "../components/ExperienceCard.astro";
 import LinkExternal from "../components/LinkExternal.astro";
+import SectionTitle from "../components/SectionTitle.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
@@ -7,14 +12,16 @@ import Layout from "../layouts/Layout.astro";
   <section
     class="w-full h-screen flex items-center justify-center bg-stone-100"
   >
-    <div class="p-4 sm:p-0">
-      <p class="text-4xl sm:text-6xl md:text-7xl font-bold text-stone-950">
-        Hi, I'm Ricky 👋
-      </p>
-      <p class="text-md sm:text-lg md:text-2xl font-medium text-stone-800">
-        I'm a software engineer.
-      </p>
-      <div class="mt-4 flex flex-wrap gap-4 items-center">
+    <div class="p-4 sm:p-0 flex flex-col items-center">
+      <div>
+        <p class="text-4xl sm:text-6xl md:text-7xl font-bold text-stone-950">
+          Hi, I'm Ricky <span class="inline-block animate-wiggle">👋</span>
+        </p>
+        <p class="text-md sm:text-lg md:text-2xl font-medium text-stone-800">
+          I'm a software engineer.
+        </p>
+      </div>
+      <div class="mt-8 flex flex-wrap gap-4 items-center justify-center">
         <LinkExternal label="github" url="https://github.com/rickyroynardson" />
         <LinkExternal
           label="linkedin"
@@ -33,6 +40,76 @@ import Layout from "../layouts/Layout.astro";
             >scroll down</span
           ></a
         >
+      </div>
+    </div>
+  </section>
+  <section class="w-full bg-stone-100" id="about">
+    <div class="container py-10">
+      <div class="space-y-4 sm:space-y-6">
+        <SectionTitle text="About me" />
+        <div
+          class="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-10 lg:gap-12"
+        >
+          <Image
+            src={meImage}
+            alt="Ricky Roy Nardson"
+            loading="lazy"
+            width="200"
+            height="200"
+            class="w-24 sm:w-36 md:w-40 lg:w-48 rounded-full"
+          />
+          <div class="space-y-2 sm:space-y-4 lg:space-y-6 text-stone-800">
+            <p>
+              Hi👋, I'm Ricky Roy Nardson, a Software Engineer based in
+              Indonesia.
+            </p>
+            <p>
+              Currently working as a Fullstack Engineer, interested in backend
+              development. Always passionate and open-minded to learn about new
+              technologies.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="w-full bg-stone-100">
+    <div class="container py-10 grid md:grid-cols-2 gap-4">
+      <div class="space-y-4">
+        <SectionTitle text="Experience" />
+        <div class="flex flex-col gap-2">
+          <ExperienceCard
+            timeline="Jun 2024 - Present"
+            title="Full Stack Engineer"
+            company="ColdSire"
+            type="Fulltime"
+          />
+          <ExperienceCard
+            timeline="Oct 2020 - Mar 2021"
+            title="Web Developer"
+            company="PT Pundi Mas Berjaya"
+            type="Internship"
+          />
+        </div>
+      </div>
+      <div>
+        <div class="space-y-4">
+          <SectionTitle text="Education" />
+          <div class="flex flex-col gap-2">
+            <EducationCard
+              school="Universitas Internasional Batam"
+              degree="Bachelor's Degree"
+              fieldOfStudy="Computer Science"
+              timeline="Jul 2022 - Present"
+            />
+            <EducationCard
+              school="SMK Multistudi High School Batam"
+              degree="Vocational High School"
+              fieldOfStudy="Computer Software Engineering"
+              timeline="2019 - 2022"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </section>
