@@ -59,7 +59,7 @@ import Layout from "../layouts/Layout.astro";
             class="w-24 sm:w-36 md:w-40 lg:w-48 h-fit rounded-full"
           />
           <div class="space-y-4 sm:space-y-6">
-            <div class="space-y-2 sm:space-y-4 lg:space-y-6 text-stone-800">
+            <div class="space-y-2 sm:space-y-4 lg:space-y-6 text-stone-80 md:text-lg">
               <p>
                 Hi👋, I'm Ricky Roy Nardson, a Software Engineer based in
                 Indonesia.
@@ -72,7 +72,7 @@ import Layout from "../layouts/Layout.astro";
             </div>
             <div class="space-y-1 sm:space-y-2">
               <SectionTitle text="Skills" />
-              <p>
+              <p class="md:text-lg">
                 JavaScript/TypeScript, Go, ReactJS, TailwindCSS, NodeJS, MySQL,
                 PostgreSQL
               </p>
@@ -86,7 +86,7 @@ import Layout from "../layouts/Layout.astro";
     <div class="container py-10 grid md:grid-cols-2 gap-4">
       <div class="space-y-4">
         <SectionTitle text="Experience" />
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col">
           <ExperienceCard
             timeline="Jun 2024 - Present"
             title="Full Stack Engineer"
@@ -104,7 +104,7 @@ import Layout from "../layouts/Layout.astro";
       <div>
         <div class="space-y-4">
           <SectionTitle text="Education" />
-          <div class="flex flex-col gap-2">
+          <div class="flex flex-col">
             <EducationCard
               school="Universitas Internasional Batam"
               degree="Bachelor's Degree"
@@ -122,4 +122,5 @@ import Layout from "../layouts/Layout.astro";
       </div>
     </div>
   </section>
+  <div class="py-14 w-full bg-stone-100"></div>
 </Layout>
