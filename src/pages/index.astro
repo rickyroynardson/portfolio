@@ -6,10 +6,56 @@ import ExperienceCard from "../components/ExperienceCard.astro";
 import Footer from "../components/Footer.astro";
 import LinkExternal from "../components/LinkExternal.astro";
 import SectionTitle from "../components/SectionTitle.astro";
+import SkillBadge from "../components/SkillBadge.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Ricky Roy Nardson | Portfolio">
+<Layout title="Ricky Roy Nardson">
+  <section class="w-full bg-white">
+    <div class="mx-auto max-w-2xl p-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-3xl lg:text-6xl font-bold text-slate-900">
+            Hi, I'm Ricky <span class="inline-block animate-wiggle">👋</span>
+          </p>
+          <p class="lg:text-2xl text-slate-700">software engineer</p>
+        </div>
+        <Image
+          src={meImage}
+          alt="Ricky Roy Nardson"
+          loading="lazy"
+          width="128"
+          height="128"
+          class="w-20 lg:w-32 h-fit rounded-full"
+        />
+      </div>
+    </div>
+  </section>
+  <section class="w-full bg-white">
+    <div class="mx-auto max-w-2xl p-4">
+      <p class="lg:text-xl font-semibold text-slate-700">About</p>
+      <p class="text-justify text-slate-500">
+        Currently working as a Fullstack Engineer, interested in backend
+        development. Always passionate and open-minded to learn about new
+        technologies.
+      </p>
+    </div>
+  </section>
+  <section class="w-full bg-white">
+    <div class="mx-auto max-w-2xl p-4 space-y-1">
+      <p class="lg:text-xl font-semibold text-slate-700">Skills</p>
+      <div class="flex flex-wrap items-center gap-1.5">
+        <SkillBadge name="TypeScript" />
+        <SkillBadge name="Go" />
+        <SkillBadge name="Python" />
+        <SkillBadge name="ReactJS" />
+        <SkillBadge name="TailwindCSS" />
+        <SkillBadge name="NodeJS" />
+        <SkillBadge name="PostgreSQL" />
+        <SkillBadge name="Docker" />
+      </div>
+    </div>
+  </section>
   <section
     class="w-full h-screen flex items-center justify-center bg-stone-100"
   >
@@ -60,7 +106,9 @@ import Layout from "../layouts/Layout.astro";
             class="w-24 sm:w-36 md:w-40 lg:w-48 h-fit rounded-full"
           />
           <div class="space-y-4 sm:space-y-6">
-            <div class="space-y-2 sm:space-y-4 lg:space-y-6 text-stone-80 md:text-lg">
+            <div
+              class="space-y-2 sm:space-y-4 lg:space-y-6 text-stone-80 md:text-lg"
+            >
               <p>
                 Hi👋, I'm Ricky Roy Nardson, a Software Engineer based in
                 Indonesia.
@@ -124,5 +172,5 @@ import Layout from "../layouts/Layout.astro";
     </div>
   </section>
   <div class="py-8 w-full bg-stone-100"></div>
-  <Footer/>
+  <Footer />
 </Layout>
