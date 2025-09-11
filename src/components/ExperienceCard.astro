@@ -1,15 +1,23 @@
 ---
-const { timeline, title, company, type } = Astro.props;
+import Image from "astro/components/Image.astro";
+
+const { title, company, timeline, image } = Astro.props;
 ---
 
-<div class="flex gap-2 md:gap-3">
-  <div class="relative flex items-center">
-      <div class="absolute left-1/2 -translate-x-1/2 w-0.5 h-full bg-blue-600"></div>
-      <div class="size-2 rounded-full bg-blue-600"></div>
-  </div>
-  <div class="py-2">
-      <p class="text-sm md:text-base text-stone-800">{timeline}</p>
-      <p class="text-stone-950 font-medium">{title}</p>
-      <p class="text-sm md:text-base text-stone-800">{company} - {type}</p>
-  </div>
+<div class="flex gap-4">
+    <Image
+        src={image}
+        alt="Ricky Roy Nardson"
+        loading="lazy"
+        width="80"
+        height="80"
+        class="size-10 md:size-16 rounded-full border border-slate-200 object-cover"
+    />
+    <div class="w-full flex flex-col md:flex-row items-start justify-between">
+        <div class="text-sm">
+            <p class="font-medium text-slate-700">{company}</p>
+            <p class="text-slate-500">{title}</p>
+        </div>
+        <p class="text-xs md:text-sm text-slate-500">{timeline}</p>
+    </div>
 </div>
