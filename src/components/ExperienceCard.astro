@@ -1,7 +1,7 @@
 ---
 import Image from "astro/components/Image.astro";
 
-const { title, company, timeline, image } = Astro.props;
+const { title, company, timeline, image, content } = Astro.props;
 ---
 
 <div class="flex gap-4">
@@ -9,15 +9,24 @@ const { title, company, timeline, image } = Astro.props;
         src={image}
         alt="Ricky Roy Nardson"
         loading="lazy"
-        width="80"
-        height="80"
-        class="size-10 md:size-16 rounded-full border border-slate-200 object-cover"
+        width="60"
+        height="60"
+        class="size-10 md:size-12 rounded-full border border-slate-200 object-cover shadow"
     />
-    <div class="w-full flex flex-col md:flex-row items-start justify-between">
-        <div class="text-sm">
-            <p class="font-medium text-slate-700">{company}</p>
-            <p class="text-slate-500">{title}</p>
+    <div class="w-full space-y-2">
+        <div class="flex flex-col md:flex-row items-start justify-between">
+            <div class="text-sm">
+                <p class="font-medium text-slate-900">{company}</p>
+                <p class="text-slate-500">{title}</p>
+            </div>
+            <p class="text-xs md:text-sm text-slate-500">{timeline}</p>
         </div>
-        <p class="text-xs md:text-sm text-slate-500">{timeline}</p>
+        {
+            content && (
+                <div class="text-justify text-sm text-slate-500 whitespace-pre-line">
+                    {content}
+                </div>
+            )
+        }
     </div>
 </div>
