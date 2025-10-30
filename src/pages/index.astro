@@ -5,99 +5,116 @@ import meImage from "../assets/me.webp";
 import mhsImage from "../assets/mhs.webp";
 import pmbImage from "../assets/pmb.webp";
 import uibImage from "../assets/uib.webp";
-import EducationCard from "../components/EducationCard.astro";
 import ExperienceCard from "../components/ExperienceCard.astro";
 import Footer from "../components/Footer.astro";
-import LinkExternal from "../components/LinkExternal.astro";
-import OldExperienceCard from "../components/OldExperienceCard.astro";
-import SectionTitle from "../components/SectionTitle.astro";
 import SkillBadge from "../components/SkillBadge.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Ricky Roy Nardson">
-  <section class="w-full bg-white">
-    <div class="mx-auto max-w-2xl p-4">
-      <div class="flex items-center justify-between">
-        <div>
-          <p class="text-3xl lg:text-6xl font-bold text-slate-900">
-            Hi, I'm Ricky <span class="inline-block animate-wiggle">👋</span>
-          </p>
-          <p class="lg:text-2xl text-slate-700">software engineer</p>
+    <section class="w-full bg-white">
+        <div class="mx-auto max-w-2xl p-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-3xl lg:text-6xl font-bold text-slate-900">
+                        Hi, I'm Ricky <span class="inline-block animate-wiggle"
+                            >👋</span
+                        >
+                    </p>
+                    <p class="lg:text-2xl text-slate-700">software engineer</p>
+                </div>
+                <Image
+                    src={meImage}
+                    alt="Ricky Roy Nardson"
+                    loading="lazy"
+                    width="128"
+                    height="128"
+                    class="w-20 lg:w-32 h-fit rounded-full shadow"
+                />
+            </div>
         </div>
-        <Image
-          src={meImage}
-          alt="Ricky Roy Nardson"
-          loading="lazy"
-          width="128"
-          height="128"
-          class="w-20 lg:w-32 h-fit rounded-full"
-        />
-      </div>
-    </div>
-  </section>
-  <section class="w-full bg-white">
-    <div class="mx-auto max-w-2xl p-4">
-      <p class="lg:text-xl font-semibold text-slate-700">About</p>
-      <p class="text-justify text-slate-500">
-        Currently working as a Fullstack Engineer, interested in backend
-        development. Always passionate and open-minded to learn about new
-        technologies.
-      </p>
-    </div>
-  </section>
-  <section class="w-full bg-white">
-    <div class="mx-auto max-w-2xl p-4 space-y-1">
-      <p class="lg:text-xl font-semibold text-slate-700">Skills</p>
-      <div class="flex flex-wrap items-center gap-1.5">
-        <SkillBadge name="TypeScript" />
-        <SkillBadge name="Go" />
-        <SkillBadge name="Python" />
-        <SkillBadge name="ReactJS" />
-        <SkillBadge name="TailwindCSS" />
-        <SkillBadge name="NodeJS" />
-        <SkillBadge name="PostgreSQL" />
-        <SkillBadge name="Docker" />
-      </div>
-    </div>
-  </section>
-  <section class="w-full bg-white">
-    <div class="mx-auto max-w-2xl p-4 space-y-2">
-      <p class="lg:text-xl font-semibold text-slate-700">Work Experience</p>
-      <div class="space-y-4">
-        <ExperienceCard
-          image={coldsireImage}
-          company="ColdSire"
-          title="Fullstack Engineer"
-          timeline="Jun 2024 - Now"
-        />
-        <ExperienceCard
-          image={pmbImage}
-          company="PT Pundi Mas Berjaya"
-          title="Web Developer"
-          timeline="Oct 2020 - Mar 2021"
-        />
-      </div>
-    </div>
-  </section>
-  <section class="w-full bg-white">
-    <div class="mx-auto max-w-2xl p-4 space-y-2">
-      <p class="lg:text-xl font-semibold text-slate-700">Education</p>
-      <div class="space-y-4">
-        <ExperienceCard
-          image={uibImage}
-          company="Universitas Internasional Batam"
-          title="Bachelor's Degree, Computer Science"
-          timeline="Jul 2022 - Now"
-        />
-        <ExperienceCard
-          image={mhsImage}
-          company="SMK Multistudi High School Batam"
-          title="Vocational High School, Computer Software Engineering"
-          timeline="2019 - 2022"
-        />
-      </div>
-    </div>
-  </section>
-  <Footer />
+    </section>
+    <section class="w-full bg-white">
+        <div class="mx-auto max-w-2xl p-4">
+            <p class="lg:text-xl font-semibold text-slate-900">About</p>
+            <p class="text-justify text-slate-700">
+                Currently working as a Fullstack Engineer, interested in backend
+                development. Always passionate and open-minded to learn about
+                new technologies.
+            </p>
+        </div>
+    </section>
+    <section class="w-full bg-white">
+        <div class="mx-auto max-w-2xl p-4 space-y-1">
+            <p class="lg:text-xl font-semibold text-slate-900">Skills</p>
+            <div class="flex flex-wrap items-center gap-1.5">
+                <SkillBadge name="Go" />
+                <SkillBadge name="TypeScript" />
+                <SkillBadge name="Python" />
+                <SkillBadge name="ReactJS" />
+                <SkillBadge name="TailwindCSS" />
+                <SkillBadge name="NodeJS" />
+                <SkillBadge name="PostgreSQL" />
+                <SkillBadge name="Docker" />
+                <SkillBadge name="Git" />
+                <SkillBadge name="C" />
+            </div>
+        </div>
+    </section>
+    <section class="w-full bg-white">
+        <div class="mx-auto max-w-2xl p-4 space-y-2">
+            <p class="lg:text-xl font-semibold text-slate-900">
+                Work Experience
+            </p>
+            <div class="space-y-4">
+                <ExperienceCard
+                    image={coldsireImage}
+                    company="ColdSire"
+                    title="Fullstack Engineer"
+                    timeline="Jun 2024 - Now"
+                />
+                <ExperienceCard
+                    image={pmbImage}
+                    company="PT Pundi Mas Berjaya"
+                    title="Web Developer"
+                    timeline="Oct 2020 - Mar 2021"
+                    content="Responsible for website development and the creation of internal tools, as well as assisting the QA team in system testing and development. Proficient in developing client websites using HTML, CSS, JavaScript, and PHP (Laravel)."
+                />
+            </div>
+        </div>
+    </section>
+    <section class="w-full bg-white">
+        <div class="mx-auto max-w-2xl p-4 space-y-2">
+            <p class="lg:text-xl font-semibold text-slate-900">Education</p>
+            <div class="space-y-4">
+                <ExperienceCard
+                    image={uibImage}
+                    company="Universitas Internasional Batam"
+                    title="Bachelor's Degree, Computer Science"
+                    timeline="Jul 2022 - Now"
+                    content="• Leader and full-stack developer across several team projects."
+                />
+                <ExperienceCard
+                    image={mhsImage}
+                    company="SMK Multistudi High School Batam"
+                    title="Vocational High School, Computer Software Engineering"
+                    timeline="2019 - 2022"
+                    content="• 3rd place in the Provincial Student Web Competency Competition."
+                />
+            </div>
+        </div>
+    </section>
+    <section class="w-full bg-white">
+        <div class="mx-auto max-w-2xl p-4 space-y-2">
+            <p class="lg:text-xl font-semibold text-slate-900">Contact</p>
+            <p class="text-slate-700">
+                Shoot me a dm on <a
+                    href="https://www.linkedin.com/in/rickyroynardson"
+                    target="_blank"
+                    class="text-blue-600 underline">linkedin</a
+                >.
+            </p>
+        </div>
+    </section>
+    <Footer />
 </Layout>
