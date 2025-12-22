@@ -1,0 +1,19 @@
+---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import NewLayout from "./NewLayout.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<NewLayout title={frontmatter.title} description={frontmatter.description}>
+    <div class="mx-auto max-w-2xl p-4">
+        <div class="mb-2">
+            <p class="text-slate-700 text-sm">{frontmatter.date}</p>
+            <h1 class="text-2xl font-bold">{frontmatter.title}</h1>
+        </div>
+        <div>
+            <slot />
+        </div>
+    </div>
+</NewLayout>

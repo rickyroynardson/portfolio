@@ -1,0 +1,30 @@
+---
+import NewLayout from "../layouts/NewLayout.astro";
+
+const allPosts = Object.values(
+	import.meta.glob("./posts/*.md", { eager: true }),
+	// biome-ignore lint/suspicious/noExplicitAny: post is any
+).sort((a: any, b: any) => {
+	return (
+		new Date(b.frontmatter.date).getTime() -
+		new Date(a.frontmatter.date).getTime()
+	);
+});
+---
+
+<NewLayout
+    title="Posts - Ricky Roy Nardson"
+    description="A bunch of writings about my journey"
+>
+    <div class="max-w-2xl mx-auto p-4">
+        <ul>
+            {
+                allPosts.map((post: any) => (
+                    <li>
+                        <a href={post.url}>{post.frontmatter.title}</a>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</NewLayout>

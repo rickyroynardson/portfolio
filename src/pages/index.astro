@@ -7,11 +7,15 @@ import pmbImage from "../assets/pmb.webp";
 import uibImage from "../assets/uib.webp";
 import ExperienceCard from "../components/ExperienceCard.astro";
 import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
 import SkillBadge from "../components/SkillBadge.astro";
-import Layout from "../layouts/Layout.astro";
+import NewLayout from "../layouts/NewLayout.astro";
 ---
 
-<Layout title="Ricky Roy Nardson">
+<NewLayout
+    title="Ricky Roy Nardson"
+    description="I'm Ricky Roy Nardson, a Software Engineer based in Indonesia."
+>
     <section class="w-full bg-white">
         <div class="mx-auto max-w-2xl p-4">
             <div class="flex items-center justify-between">
@@ -30,6 +34,7 @@ import Layout from "../layouts/Layout.astro";
                     width="128"
                     height="128"
                     class="w-20 lg:w-32 h-fit rounded-full shadow"
+                    loading="eager"
                 />
             </div>
         </div>
@@ -117,5 +122,4 @@ import Layout from "../layouts/Layout.astro";
             </p>
         </div>
     </section>
-    <Footer />
-</Layout>
+</NewLayout>
