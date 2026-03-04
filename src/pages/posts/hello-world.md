@@ -1,7 +1,10 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Hello, World!'
-description: 'Hello, Description!'
-date: '2025-12-21'
+description: '👋🏻 hey there'
+date: '2026-03-04'
 ---
-# Hello, World!
+
+## Introduction
+
+Heyo there, welcome to my first post!

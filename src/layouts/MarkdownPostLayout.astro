@@ -1,19 +1,36 @@
 ---
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
+import TableOfContents from "../components/TableOfContents.astro";
 import NewLayout from "./NewLayout.astro";
 
-const { frontmatter } = Astro.props;
+const { frontmatter, headings } = Astro.props;
+
+const formattedDate = new Date(frontmatter.date).toLocaleDateString("en-US", {
+	year: "numeric",
+	month: "long",
+	day: "numeric",
+});
 ---
 
 <NewLayout title={frontmatter.title} description={frontmatter.description}>
-    <div class="mx-auto max-w-2xl p-4">
-        <div class="mb-2">
-            <p class="text-slate-700 text-sm">{frontmatter.date}</p>
-            <h1 class="text-2xl font-bold">{frontmatter.title}</h1>
+    <div class="max-w-2xl lg:max-w-5xl mx-auto p-4 py-12">
+        <a
+            href="/posts"
+            class="text-sm text-slate-500 hover:text-slate-900 transition-colors"
+        >
+            &larr; Back to posts
+        </a>
+        <div class="mt-4 mb-8">
+            <p class="text-slate-500 text-sm">{formattedDate}</p>
+            <h1 class="text-3xl font-bold mt-1">{frontmatter.title}</h1>
+            {frontmatter.description && (
+                <p class="text-slate-500 mt-2">{frontmatter.description}</p>
+            )}
         </div>
-        <div>
-            <slot />
+        <div class="lg:grid lg:grid-cols-[1fr_200px] lg:gap-12">
+            <div class="prose prose-slate max-w-none">
+                <slot />
+            </div>
+            <TableOfContents headings={headings} />
         </div>
     </div>
 </NewLayout>
