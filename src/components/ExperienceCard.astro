@@ -4,29 +4,96 @@ import Image from "astro/components/Image.astro";
 const { title, company, timeline, image, content } = Astro.props;
 ---
 
-<div class="flex gap-4">
+<div
+    class:list={["flex gap-4", content && "group"]}
+    data-collapsible={content ? "true" : undefined}
+>
     <Image
         src={image}
         alt="Ricky Roy Nardson"
-        loading="lazy"
+        loading="eager"
         width="60"
         height="60"
-        class="size-10 md:size-12 rounded-full border border-slate-200 object-cover shadow"
+        class:list={[
+            "size-10 md:size-12 rounded-full border border-slate-200 object-cover shadow",
+            content && "cursor-pointer",
+        ]}
     />
     <div class="w-full space-y-2">
-        <div class="flex flex-col md:flex-row items-start justify-between">
+        <div
+            class:list={[
+                "flex flex-col md:flex-row items-start justify-between",
+                content && "cursor-pointer select-none",
+            ]}
+        >
             <div class="text-sm">
-                <p class="font-medium text-slate-900">{company}</p>
+                <p class="font-medium text-slate-900 flex items-center gap-1">
+                    {company}
+                    {
+                        content && (
+                            <svg
+                                class="collapsible-arrow size-3.5 text-slate-400 group-hover:text-slate-600 transition-transform duration-300"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                    clip-rule="evenodd"
+                                />
+                            </svg>
+                        )
+                    }
+                </p>
                 <p class="text-slate-500">{title}</p>
             </div>
             <p class="text-xs md:text-sm text-slate-500">{timeline}</p>
         </div>
         {
             content && (
-                <div class="text-justify text-sm text-slate-500 whitespace-pre-line">
+                <div class="collapsible-content text-justify text-sm text-slate-500 whitespace-pre-line overflow-hidden transition-all duration-300 ease-in-out">
                     {content}
                 </div>
             )
         }
     </div>
 </div>
+
+<script>
+    function initCollapsibles() {
+        document.querySelectorAll("[data-collapsible]").forEach((card) => {
+            const content = card.querySelector(
+                ".collapsible-content",
+            ) as HTMLElement;
+            const arrow = card.querySelector(
+                ".collapsible-arrow",
+            ) as HTMLElement;
+            if (!content || !arrow) return;
+
+            // Default: opened
+            content.style.maxHeight = `${content.scrollHeight}px`;
+
+            // Prevent clicks on the detail text from toggling
+            content.addEventListener("click", (e) => e.stopPropagation());
+
+            card.addEventListener("click", () => {
+                const isOpen = content.style.maxHeight !== "0px";
+                if (isOpen) {
+                    content.style.maxHeight = `${content.scrollHeight}px`;
+                    content.offsetHeight; // force reflow
+                    content.style.maxHeight = "0px";
+                    content.style.opacity = "0";
+                    arrow.style.transform = "rotate(-90deg)";
+                } else {
+                    content.style.maxHeight = `${content.scrollHeight}px`;
+                    content.style.opacity = "1";
+                    arrow.style.transform = "rotate(0deg)";
+                }
+            });
+        });
+    }
+
+    initCollapsibles();
+    document.addEventListener("astro:after-swap", initCollapsibles);
+</script>

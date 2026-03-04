@@ -6,12 +6,14 @@ import mhsImage from "../assets/mhs.webp";
 import pmbImage from "../assets/pmb.webp";
 import uibImage from "../assets/uib.webp";
 import ExperienceCard from "../components/ExperienceCard.astro";
-import Footer from "../components/Footer.astro";
 import SkillBadge from "../components/SkillBadge.astro";
-import Layout from "../layouts/Layout.astro";
+import NewLayout from "../layouts/NewLayout.astro";
 ---
 
-<Layout title="Ricky Roy Nardson">
+<NewLayout
+    title="Ricky Roy Nardson"
+    description="I'm Ricky Roy Nardson, a Software Engineer based in Indonesia."
+>
     <section class="w-full bg-white">
         <div class="mx-auto max-w-2xl p-4">
             <div class="flex items-center justify-between">
@@ -30,6 +32,7 @@ import Layout from "../layouts/Layout.astro";
                     width="128"
                     height="128"
                     class="w-20 lg:w-32 h-fit rounded-full shadow"
+                    loading="eager"
                 />
             </div>
         </div>
@@ -39,7 +42,7 @@ import Layout from "../layouts/Layout.astro";
             <p class="lg:text-xl font-semibold text-slate-900">About</p>
             <p class="text-justify text-slate-700">
                 Currently working as a Fullstack Engineer, interested in backend
-                development. Always passionate and open-minded to learn about
+                development, distributed systems, and infrastructures. Always passionate and open-minded to learn about
                 new technologies.
             </p>
         </div>
@@ -92,8 +95,8 @@ import Layout from "../layouts/Layout.astro";
                     image={uibImage}
                     company="Universitas Internasional Batam"
                     title="Bachelor's Degree, Computer Science"
-                    timeline="Jul 2022 - Now"
-                    content="• Leader and full-stack developer across several team projects."
+                    timeline="2022 - 2026"
+                    content="• Leader and full-stack developer across several team projects.\n• &quot;Best Paper&quot; awards of the 7th National Conference for Community Service Project (NaCosPro) 2025"
                 />
                 <ExperienceCard
                     image={mhsImage}
@@ -113,9 +116,8 @@ import Layout from "../layouts/Layout.astro";
                     href="https://www.linkedin.com/in/rickyroynardson"
                     target="_blank"
                     class="text-blue-600 underline">linkedin</a
-                >.
+                >. Or check my <a href="https://www.github.com/rickyroynardson" target="_blank" class="text-blue-600 underline">github</a>.
             </p>
         </div>
     </section>
-    <Footer />
-</Layout>
+</NewLayout>
