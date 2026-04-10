@@ -1,7 +1,14 @@
 ---
 import Image from "astro/components/Image.astro";
 
-const { title, company, timeline, image, content } = Astro.props;
+const {
+	title,
+	company,
+	timeline,
+	image,
+	content,
+	imageLoading = "lazy",
+} = Astro.props;
 ---
 
 <div
@@ -10,8 +17,9 @@ const { title, company, timeline, image, content } = Astro.props;
 >
     <Image
         src={image}
-        alt="Ricky Roy Nardson"
-        loading="eager"
+        alt={`${company} logo`}
+        loading={imageLoading}
+        decoding="async"
         width="60"
         height="60"
         class:list={[

@@ -28,11 +28,12 @@ import NewLayout from "../layouts/NewLayout.astro";
                 <Image
                     src={meImage}
                     alt="Ricky Roy Nardson"
-                    loading="lazy"
+                    loading="eager"
+                    decoding="async"
+                    fetchpriority="high"
                     width="128"
                     height="128"
                     class="w-20 lg:w-32 h-fit rounded-full shadow"
-                    loading="eager"
                 />
             </div>
         </div>

@@ -22,19 +22,26 @@ const { title, description } = Astro.props;
         </div>
         <Footer />
         <script>
-            import Lenis from "lenis";
-            const lenis = new Lenis({
-                lerp: 0.9,
-                smoothWheel: true,
-                duration: 0.8,
-            });
-
-            function raf(time: number) {
-                lenis.raf(time);
-                requestAnimationFrame(raf);
+            /** Smooth scroll after first paint — avoids blocking LCP / TBT. */
+            function startLenis() {
+                import("lenis").then(({ default: Lenis }) => {
+                    const lenis = new Lenis({
+                        lerp: 0.9,
+                        smoothWheel: true,
+                        duration: 0.8,
+                    });
+                    function raf(time: number) {
+                        lenis.raf(time);
+                        requestAnimationFrame(raf);
+                    }
+                    requestAnimationFrame(raf);
+                });
             }
-
-            requestAnimationFrame(raf);
+            if (typeof window.requestIdleCallback === "function") {
+                window.requestIdleCallback(() => startLenis(), { timeout: 2500 });
+            } else {
+                globalThis.addEventListener("load", startLenis, { once: true });
+            }
         </script>
     </body>
 </html>
