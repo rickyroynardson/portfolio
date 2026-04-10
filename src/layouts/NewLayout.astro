@@ -16,10 +16,16 @@ const { title, description } = Astro.props;
         <meta name="description" content={description} />
     </head>
     <body class="bg-white flex flex-col min-h-screen">
+        <a
+            href="#main-content"
+            class="fixed left-4 top-0 z-[100] -translate-y-full rounded border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-900 shadow-md transition-transform focus:translate-y-4 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+        >
+            Skip to main content
+        </a>
         <Header />
-        <div class="flex-1">
+        <main id="main-content" class="flex-1" tabindex="-1">
             <slot />
-        </div>
+        </main>
         <Footer />
         <script>
             /** Smooth scroll after first paint — avoids blocking LCP / TBT. */
