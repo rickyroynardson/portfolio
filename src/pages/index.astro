@@ -28,11 +28,12 @@ import NewLayout from "../layouts/NewLayout.astro";
                 <Image
                     src={meImage}
                     alt="Ricky Roy Nardson"
-                    loading="lazy"
+                    loading="eager"
+                    decoding="async"
+                    fetchpriority="high"
                     width="128"
                     height="128"
                     class="w-20 lg:w-32 h-fit rounded-full shadow"
-                    loading="eager"
                 />
             </div>
         </div>
@@ -74,15 +75,16 @@ import NewLayout from "../layouts/NewLayout.astro";
                 <ExperienceCard
                     image={coldsireImage}
                     company="ColdSire"
-                    title="Fullstack Engineer"
+                    title="Software Engineer (Fullstack)"
                     timeline="Jun 2024 - Now"
+                    content="Currently keeping ColdSire running smoothly so your campaigns and replies land safely every time."
                 />
                 <ExperienceCard
                     image={pmbImage}
                     company="PT Pundi Mas Berjaya"
-                    title="Web Developer"
+                    title="Software Engineer Intern"
                     timeline="Oct 2020 - Mar 2021"
-                    content="Responsible for website development and the creation of internal tools, as well as assisting the QA team in system testing and development. Proficient in developing client websites using HTML, CSS, JavaScript, and PHP (Laravel)."
+                    content="• Delivered full-cycle web development across client websites and internal tools using HTML, CSS, JavaScript, and PHP (Laravel).\n• Collaborated with QA team to identify issues early and uphold application quality standards throughout development."
                 />
             </div>
         </div>
@@ -94,9 +96,9 @@ import NewLayout from "../layouts/NewLayout.astro";
                 <ExperienceCard
                     image={uibImage}
                     company="Universitas Internasional Batam"
-                    title="Bachelor's Degree, Computer Science"
+                    title="Bachelor's degree, Computer Science"
                     timeline="2022 - 2026"
-                    content="• Leader and full-stack developer across several team projects.\n• &quot;Best Paper&quot; awards of the 7th National Conference for Community Service Project (NaCosPro) 2025"
+                    content="CGPA: 3.94/4.0\n• Leader and full-stack developer across several team projects.\n• &quot;Best Paper&quot; awards of the 7th National Conference for Community Service Project (NaCosPro) 2025."
                 />
                 <ExperienceCard
                     image={mhsImage}
