@@ -27,7 +27,7 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString("en-US", {
             )}
         </div>
         <div class="lg:grid lg:grid-cols-[1fr_200px] lg:gap-12">
-            <div class="prose prose-slate max-w-none">
+            <div class="prose prose-slate dark:prose-neutral dark:prose-invert max-w-none">
                 <slot />
             </div>
             <TableOfContents headings={headings} />

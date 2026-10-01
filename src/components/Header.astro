@@ -1,4 +1,6 @@
 ---
+import { FaMoon, FaSun } from "react-icons/fa6";
+
 const pathname = Astro.url.pathname;
 ---
 
@@ -30,6 +32,29 @@ const pathname = Astro.url.pathname;
             >
                 posts
             </a>
+            <button
+                type="button"
+                id="theme-toggle"
+                aria-label="Dark mode"
+                aria-pressed="false"
+                class="grid size-8 cursor-pointer place-items-center rounded-full text-slate-500 ring-1 ring-slate-200 transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-rotate-12 hover:text-blue-600 hover:ring-blue-600/50 motion-reduce:transition-none"
+            >
+                <FaMoon className="size-3.5 dark:hidden" aria-hidden="true" />
+                <FaSun className="hidden size-3.5 dark:block" aria-hidden="true" />
+            </button>
         </div>
     </nav>
 </header>
+
+<script>
+    const toggle = document.getElementById("theme-toggle");
+    const root = document.documentElement;
+    toggle?.setAttribute("aria-pressed", String(root.classList.contains("dark")));
+    toggle?.addEventListener("click", () => {
+        const dark = root.classList.toggle("dark");
+        toggle.setAttribute("aria-pressed", String(dark));
+        try {
+            localStorage.setItem("theme", dark ? "dark" : "light");
+        } catch {}
+    });
+</script>
