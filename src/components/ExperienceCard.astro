@@ -23,8 +23,9 @@ const {
         width="60"
         height="60"
         class:list={[
-            "size-10 md:size-12 rounded-full border border-slate-200 object-cover shadow",
-            content && "cursor-pointer",
+            "size-10 md:size-12 shrink-0 rounded-full object-cover shadow-sm ring-1 ring-slate-200",
+            content &&
+                "cursor-pointer transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-rotate-3 group-hover:scale-105 group-hover:shadow-md group-hover:shadow-blue-600/20 group-hover:ring-2 group-hover:ring-blue-600/50 motion-reduce:transition-none",
         ]}
     />
     <div class="w-full space-y-2">
@@ -60,7 +61,7 @@ const {
         </div>
         {
             content && (
-                <div class="collapsible-content text-justify text-sm text-slate-500 whitespace-pre-line overflow-hidden transition-all duration-300 ease-in-out">
+                <div class="collapsible-content text-pretty text-sm text-slate-500 whitespace-pre-line overflow-hidden transition-all duration-300 ease-in-out">
                     {content}
                 </div>
             )

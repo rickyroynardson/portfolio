@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  ponytail: dark mode remaps the palette the site uses (blog prose uses dark:prose-invert) instead of adding
+  dark: variants to every class. "white" means "page background" here.
+  New colors (outside white/slate/sky-50/blue-600) need a mapping below.
+*/
+.dark {
+	color-scheme: dark;
+	/* neutral grays, no blue tint */
+	--color-white: oklch(20.5% 0 0); /* neutral-900, page background */
+	--color-sky-50: oklch(26.9% 0 0); /* neutral-800 */
+	--color-slate-100: oklch(26.9% 0 0); /* neutral-800 */
+	--color-slate-200: oklch(26.9% 0 0); /* neutral-800 */
+	--color-slate-400: oklch(55.6% 0 0); /* neutral-500 */
+	--color-slate-500: oklch(70.8% 0 0); /* neutral-400 */
+	--color-slate-600: oklch(87% 0 0); /* neutral-300 */
+	--color-slate-700: oklch(87% 0 0); /* neutral-300 */
+	--color-slate-900: oklch(98.5% 0 0); /* neutral-50 */
+	--color-blue-600: oklch(70.7% 0.165 254.624); /* blue-400 */
+}
+
+@utility container {
+	margin-inline: auto;
+	padding-inline: 1rem;
+	@variant sm {
+		padding-inline: 2rem;
+	}
+	@variant lg {
+		padding-inline: 4rem;
+	}
+	@variant xl {
+		padding-inline: 5rem;
+	}
+	@variant 2xl {
+		padding-inline: 14rem;
+	}
+}
+
+@theme {
+	--font-sans:
+		Inter, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+	--animate-wiggle: wiggle 0.5s ease-in-out infinite;
+
+	@keyframes wiggle {
+		0%,
+		100% {
+			transform: rotate(-3deg);
+		}
+		50% {
+			transform: rotate(3deg);
+		}
+	}
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentcolor);
+	}
+}

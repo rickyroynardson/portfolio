@@ -1,6 +1,7 @@
 ---
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import "../styles/global.css";
 
 const { title, description } = Astro.props;
 ---
@@ -14,11 +15,18 @@ const { title, description } = Astro.props;
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
         <meta name="description" content={description} />
+        <script is:inline>
+            // Runs before paint so dark mode doesn't flash white. Light is the default.
+            try {
+                if (localStorage.getItem("theme") === "dark")
+                    document.documentElement.classList.add("dark");
+            } catch {}
+        </script>
     </head>
     <body class="bg-white flex flex-col min-h-screen">
         <a
             href="#main-content"
-            class="fixed left-4 top-0 z-[100] -translate-y-full rounded border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-900 shadow-md transition-transform focus:translate-y-4 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+            class="fixed left-4 top-0 z-100 -translate-y-full rounded-sm border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-900 shadow-md transition-transform focus:translate-y-4 focus:outline-hidden focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
         >
             Skip to main content
         </a>
