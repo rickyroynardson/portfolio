@@ -75,6 +75,7 @@ const skills = [
                         />
                         <Image
                             src={meImage}
+                            loading="eager"
                             alt=""
                             decoding="async"
                             width="256"
@@ -119,6 +120,7 @@ const skills = [
             <h2 class="lg:text-xl font-semibold text-slate-900">Work Experience<span class="text-blue-600">.</span></h2>
             <div class="space-y-4">
                 <ExperienceCard
+                    imageLoading="eager"
                     image={coldsireImage}
                     company="ColdSire"
                     title="Software Engineer (Fullstack)"
@@ -126,6 +128,7 @@ const skills = [
                     content="Currently keeping ColdSire running smoothly so your campaigns and replies land safely every time."
                 />
                 <ExperienceCard
+                    imageLoading="eager"
                     image={pmbImage}
                     company="PT Pundi Mas Berjaya"
                     title="Software Engineer Intern"
