@@ -6,9 +6,16 @@ const { name, icon: Icon, color } = Astro.props;
     style={`--brand: ${color}`}
     class="group inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm ring-1 ring-slate-200 transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:text-slate-900 hover:shadow-md hover:shadow-blue-600/10 hover:ring-blue-600/40 motion-reduce:transition-none"
 >
-    <Icon
-        className="size-3.5 text-slate-400 transition-colors duration-300 group-hover:text-(--brand)"
-        aria-hidden="true"
-    />
+    {Icon ? (
+        <Icon
+            className="size-3.5 text-slate-400 transition-colors duration-300 group-hover:text-(--brand)"
+            aria-hidden="true"
+        />
+    ) : (
+        <span
+            class="size-2 rounded-full bg-slate-400 transition-colors duration-300 group-hover:bg-(--brand)"
+            aria-hidden="true"
+        />
+    )}
     {name}
 </div>
