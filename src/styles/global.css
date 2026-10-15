@@ -14,6 +14,7 @@
 	/* neutral grays, no blue tint */
 	--color-white: oklch(20.5% 0 0); /* neutral-900, page background */
 	--color-sky-50: oklch(26.9% 0 0); /* neutral-800 */
+	--color-slate-50: oklch(26.9% 0 0); /* neutral-800 */
 	--color-slate-100: oklch(26.9% 0 0); /* neutral-800 */
 	--color-slate-200: oklch(26.9% 0 0); /* neutral-800 */
 	--color-slate-400: oklch(55.6% 0 0); /* neutral-500 */

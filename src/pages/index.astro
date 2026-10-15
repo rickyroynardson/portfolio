@@ -20,6 +20,7 @@ import meSketchImage from "../assets/me-sketch.png";
 import mhsImage from "../assets/mhs.webp";
 import pmbImage from "../assets/pmb.webp";
 import uibImage from "../assets/uib.webp";
+import wheretogoLogo from "../assets/wheretogo.svg";
 import ExperienceCard from "../components/ExperienceCard.astro";
 import SkillBadge from "../components/SkillBadge.astro";
 import NewLayout from "../layouts/NewLayout.astro";
@@ -38,6 +39,15 @@ const skills = [
 	{ name: "C", icon: SiC, color: "#5C6BC0" },
 	{ name: "AWS", icon: FaAws, color: "#FF9900" },
 	{ name: "gRPC", color: "#244C5A" },
+];
+
+const playground = [
+	{
+		name: "WhereToGo",
+		logo: wheretogoLogo,
+		description: "Pick a spot for hangout, date, or food.",
+		href: "https://wheretg.vercel.app",
+	},
 ];
 ---
 
@@ -141,6 +151,49 @@ const skills = [
     </section>
     <section class="w-full bg-white">
         <div class="mx-auto max-w-2xl p-4 space-y-2">
+            <h2 class="lg:text-xl font-semibold text-slate-900">Playground<span class="text-blue-600">.</span></h2>
+            <p class="text-slate-700">Things I built for fun.</p>
+            <div class="space-y-3">
+                {
+                    playground.map((item) => (
+                        <a
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            data-spotlight
+                            class="group relative flex min-h-52 flex-col overflow-hidden rounded-3xl border border-slate-200 bg-slate-50 p-5 transition-colors duration-300 hover:border-slate-900 motion-reduce:transition-none"
+                        >
+                            <span
+                                aria-hidden="true"
+                                class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-[radial-gradient(320px_circle_at_var(--x,50%)_var(--y,50%),color-mix(in_oklab,var(--color-blue-600)_18%,transparent),transparent_70%)] motion-reduce:transition-none"
+                            ></span>
+                            <div class="flex items-start justify-between">
+                                <Image
+                                    src={item.logo}
+                                    alt=""
+                                    class="size-12 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6 motion-reduce:transition-none"
+                                />
+                                <span class="flex size-9 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-900 transition-all duration-300 group-hover:rotate-45 group-hover:border-transparent group-hover:bg-blue-600 group-hover:text-white motion-reduce:transition-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
+                                </span>
+                            </div>
+                            <Image
+                                src={item.logo}
+                                alt=""
+                                class="pointer-events-none absolute -right-8 -bottom-12 size-48 select-none opacity-10 grayscale transition-all duration-700 group-hover:-translate-x-2 group-hover:-translate-y-2 group-hover:opacity-25 group-hover:grayscale-0 motion-reduce:transition-none"
+                            />
+                            <div class="relative mt-auto pt-4">
+                                <h3 class="text-2xl font-bold text-slate-900 lg:text-3xl">{item.name}</h3>
+                                <p class="mt-1 text-pretty text-sm text-slate-600">{item.description}</p>
+                            </div>
+                        </a>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+    <section class="w-full bg-white">
+        <div class="mx-auto max-w-2xl p-4 space-y-2">
             <h2 class="lg:text-xl font-semibold text-slate-900">Education<span class="text-blue-600">.</span></h2>
             <div class="space-y-4">
                 <ExperienceCard
@@ -173,6 +226,15 @@ const skills = [
         </div>
     </section>
 <script>
+    // Cursor-following gradient on playground cards.
+    for (const card of document.querySelectorAll<HTMLElement>("[data-spotlight]")) {
+        card.addEventListener("pointermove", (e) => {
+            const r = card.getBoundingClientRect();
+            card.style.setProperty("--x", `${e.clientX - r.left}px`);
+            card.style.setProperty("--y", `${e.clientY - r.top}px`);
+        });
+    }
+
     // Tap toggle for touch screens; hover covers desktop.
     const avatar = document.getElementById("avatar");
     avatar?.addEventListener("click", () => {
