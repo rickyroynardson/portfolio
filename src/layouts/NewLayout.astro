@@ -1,4 +1,5 @@
 ---
+import Analytics from "@vercel/analytics/astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import "../styles/global.css";
@@ -22,6 +23,7 @@ const { title, description } = Astro.props;
                     document.documentElement.classList.add("dark");
             } catch {}
         </script>
+        <Analytics />
     </head>
     <body class="bg-white flex flex-col min-h-screen">
         <a
