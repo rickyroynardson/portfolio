@@ -1,0 +1,125 @@
+---
+import TravelGlobe from "../components/TravelGlobe.astro";
+import NewLayout from "../layouts/NewLayout.astro";
+import { countryName, flag, getTravels, travelDates } from "../utils/travels";
+
+const travels = await getTravels();
+const travelsByYear = Object.entries(
+	Object.groupBy(travels, (t) => t.data.legs[0].date.getUTCFullYear()),
+).reverse();
+
+// trips per country, most visited first
+const countryCounts = Object.entries(
+	Object.groupBy(travels, (t) => t.data.destination),
+)
+	.map(([country, trips]) => [country, trips?.length ?? 0] as const)
+	.sort(
+		(a, b) => b[1] - a[1] || countryName(a[0]).localeCompare(countryName(b[0])),
+	);
+
+const plural = (n: number, word: string, many = `${word}s`) =>
+	`${n} ${n === 1 ? word : many}`;
+---
+
+<NewLayout
+    title="Travels - Ricky Roy Nardson"
+    description="Places I've been, and what happened there"
+>
+    <div class="max-w-2xl mx-auto p-4 py-8">
+        <div class="mb-6">
+            <h1 class="text-3xl lg:text-5xl font-bold text-slate-900">Travels</h1>
+            <p class="lg:text-lg text-slate-700">Places I've been, and what happened there</p>
+        </div>
+        {travels.length > 0 && (
+            <>
+                <fieldset class="mb-4 flex flex-wrap gap-1.5">
+                    <legend class="sr-only">Filter by year</legend>
+                    {["all", ...travelsByYear.map(([year]) => year)].map((year) => (
+                        <label class="cursor-pointer rounded-full px-3 py-1 text-sm text-slate-500 tabular-nums ring-1 ring-slate-200 transition-colors hover:text-slate-900 has-checked:bg-slate-900 has-checked:text-white has-checked:ring-slate-900 has-focus-visible:ring-2 has-focus-visible:ring-blue-600">
+                            <input type="radio" name="year" value={year} checked={year === "all"} class="sr-only" />
+                            {year === "all" ? "All" : year}
+                        </label>
+                    ))}
+                </fieldset>
+                <div class="mb-8">
+                    <p id="travel-summary" class="text-sm text-slate-500">
+                        {plural(countryCounts.length, "country", "countries")} · {plural(travels.length, "trip")}
+                    </p>
+                    <ul class="mt-2 flex flex-wrap gap-1.5">
+                        {countryCounts.map(([country, count]) => (
+                            <li
+                                data-country-count={country}
+                                title={plural(count, "trip")}
+                                class="flex items-center gap-1.5 rounded-full bg-slate-50 px-2.5 py-1 text-sm text-slate-700"
+                            >
+                                <span aria-hidden="true">{flag(country)}</span>
+                                {countryName(country)}
+                                <span data-n class="font-medium text-slate-900 tabular-nums">{count}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                <div class="mb-10">
+                    <TravelGlobe travels={travels} />
+                </div>
+            </>
+        )}
+        <div class="space-y-6">
+            {
+                travelsByYear.map(([year, travels]) => (
+                    <div data-year-group={year}>
+                        <h2 class="text-sm font-medium text-slate-500 tabular-nums">{year}</h2>
+                        <ul class="mt-1">
+                            {travels?.map((travel) => (
+                                <li data-trip data-year={year} data-country={travel.data.destination}>
+                                    <a
+                                        href={`/travels/${travel.id}`}
+                                        class="-mx-3 flex items-center gap-3 rounded-xl px-3 py-2 transition-colors hover:bg-slate-50 motion-reduce:transition-none"
+                                    >
+                                        <span class="text-2xl" aria-hidden="true">{flag(travel.data.destination)}</span>
+                                        <span class="min-w-0 flex-1">
+                                            <span class="block truncate font-medium text-slate-900">{travel.data.trip}</span>
+                                            <span class="block truncate text-sm text-slate-500">{countryName(travel.data.destination)}</span>
+                                        </span>
+                                        <span class="shrink-0 text-sm text-slate-500 tabular-nums">{travelDates(travel.data.legs)}</span>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</NewLayout>
+
+<script>
+    const plural = (n: number, word: string, many = `${word}s`) => `${n} ${n === 1 ? word : many}`;
+    const trips = [...document.querySelectorAll<HTMLElement>("[data-trip]")];
+
+    function selectYear(year: string) {
+        const shown = trips.filter((t) => year === "all" || t.dataset.year === year);
+        const counts = new Map<string | undefined, number>();
+        for (const t of shown) counts.set(t.dataset.country, (counts.get(t.dataset.country) ?? 0) + 1);
+        for (const group of document.querySelectorAll<HTMLElement>("[data-year-group]")) {
+            group.hidden = year !== "all" && group.dataset.yearGroup !== year;
+        }
+        for (const chip of document.querySelectorAll<HTMLElement>("[data-country-count]")) {
+            const n = counts.get(chip.dataset.countryCount) ?? 0;
+            chip.hidden = n === 0;
+            chip.title = plural(n, "trip");
+            const count = chip.querySelector("[data-n]");
+            if (count) count.textContent = String(n);
+        }
+        const summary = document.getElementById("travel-summary");
+        if (summary) {
+            summary.textContent = `${plural(counts.size, "country", "countries")} · ${plural(shown.length, "trip")}`;
+        }
+        // TravelGlobe listens for this
+        document.dispatchEvent(new CustomEvent("travels:year", { detail: year }));
+    }
+
+    for (const input of document.querySelectorAll<HTMLInputElement>('input[name="year"]')) {
+        input.addEventListener("change", () => selectYear(input.value));
+    }
+</script>

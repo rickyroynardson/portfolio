@@ -1,0 +1,218 @@
+---
+import type { CollectionEntry } from "astro:content";
+import countries from "i18n-iso-countries";
+import { feature } from "topojson-client";
+import type { GeometryCollection, Topology } from "topojson-specification";
+import world from "world-atlas/countries-50m.json";
+import { places } from "../utils/places";
+
+interface Props {
+	travels: CollectionEntry<"travels">[];
+}
+
+const { travels } = Astro.props;
+
+// Visited country shapes are picked at build time so the client only ships the coarse land outline.
+const byId = new Map(
+	travels.map((t) => [
+		countries.alpha2ToNumeric(t.data.destination),
+		t.data.destination,
+	]),
+);
+const topo = world as unknown as Topology<{ countries: GeometryCollection }>;
+const shapes = Object.fromEntries(
+	feature(topo, topo.objects.countries)
+		.features.filter((f) => byId.has(String(f.id)))
+		.map((f) => [byId.get(String(f.id)), f]),
+);
+
+// The client filters these by year.
+const trips = travels.map((t) => ({
+	year: String(t.data.legs[0].date.getUTCFullYear()),
+	country: t.data.destination,
+	legs: t.data.legs.map((l) => [places[l.from], places[l.to]]),
+}));
+
+// ~1km precision is plenty and keeps the inline data small
+const data = JSON.stringify({ shapes, trips }, (_, v) =>
+	typeof v === "number" ? Math.round(v * 100) / 100 : v,
+);
+---
+
+<figure class="relative">
+    <svg
+        id="globe"
+        data-globe={data}
+        viewBox="0 0 400 400"
+        role="img"
+        aria-label="Globe highlighting visited countries and travel routes"
+        class="mx-auto block w-full max-w-md cursor-grab touch-pan-y select-none [clip-path:circle(50%)] active:cursor-grabbing"
+    >
+        <path data-sphere class="fill-white stroke-slate-200" />
+        <path data-graticule class="fill-none stroke-slate-100" />
+        <path data-land class="fill-slate-200" />
+        <path data-visited class="fill-blue-600" />
+        <path
+            data-routes
+            class="fill-none stroke-blue-600 [stroke-dasharray:4_3] animate-[route-dash_1s_linear_infinite] motion-reduce:animate-none"
+            stroke-width="1.5"
+            stroke-linecap="round"
+        />
+        <g data-airports class="fill-white stroke-blue-600" stroke-width="1.5"></g>
+    </svg>
+    <div class="absolute top-0 right-0 flex flex-col gap-1.5">
+        {[["1.6", "Zoom in", "+"], ["0.625", "Zoom out", "−"]].map(([factor, label, text]) => (
+            <button
+                type="button"
+                data-zoom={factor}
+                aria-label={label}
+                class="grid size-8 cursor-pointer place-items-center rounded-full bg-white text-slate-500 ring-1 ring-slate-200 transition-colors hover:text-blue-600 hover:ring-blue-600/50"
+            >
+                {text}
+            </button>
+        ))}
+    </div>
+    <figcaption class="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-slate-500">
+        <span class="flex items-center gap-1.5"><span class="size-2.5 rounded-sm bg-blue-600"></span>visited</span>
+        <span class="flex items-center gap-1.5"><span class="w-4 border-t-[1.5px] border-dashed border-blue-600"></span>route</span>
+        <span class="flex items-center gap-1.5"><span class="size-2.5 rounded-full border-[1.5px] border-blue-600"></span>airport</span>
+        <span>· drag to rotate</span>
+    </figcaption>
+</figure>
+
+<style>
+    @keyframes route-dash {
+        to {
+            stroke-dashoffset: -7;
+        }
+    }
+</style>
+
+<script>
+    import {
+        type GeoPermissibleObjects,
+        geoDistance,
+        geoGraticule10,
+        geoInterpolate,
+        geoOrthographic,
+        geoPath,
+    } from "d3-geo";
+    import { feature } from "topojson-client";
+    import type { GeometryCollection, Topology } from "topojson-specification";
+    import landTopo from "world-atlas/land-110m.json";
+
+    type Point = [number, number];
+
+    const svg = document.querySelector<SVGSVGElement>("#globe");
+    if (svg?.dataset.globe) {
+        const { shapes, trips } = JSON.parse(svg.dataset.globe) as {
+            shapes: Record<string, GeoPermissibleObjects>;
+            trips: { year: string; country: string; legs: [Point, Point][] }[];
+        };
+        const topo = landTopo as unknown as Topology<{ land: GeometryCollection }>;
+        const land = feature(topo, topo.objects.land);
+        const graticule = geoGraticule10();
+        const part = (name: string) => svg.querySelector(`[data-${name}]`) as SVGElement;
+
+        const SIZE = 400;
+        const MID = SIZE / 2;
+        const RADIUS = MID * 0.82; // leaves room for lifted arcs inside the circular frame
+        const projection = geoOrthographic().translate([MID, MID]);
+        const path = geoPath(projection);
+
+        let visited: GeoPermissibleObjects[] = [];
+        let routes: [Point, Point][] = [];
+        let airports: Point[] = [];
+        let rotate: Point = [0, 0];
+        let zoom = 1;
+
+        // Show one year's trips ("all" for every trip) and turn to face them.
+        function select(year: string) {
+            const shown = trips.filter((t) => year === "all" || t.year === year);
+            visited = [...new Set(shown.map((t) => t.country))].flatMap((c) => shapes[c] ?? []);
+            // BTH-SIN and SIN-BTH draw the same arc
+            const unique = <T,>(items: T[]) => [...new Map(items.map((i) => [JSON.stringify(i), i])).values()];
+            const legs = shown.flatMap((t) => t.legs);
+            routes = unique(legs.map((leg) => [...leg].sort() as [Point, Point]));
+            airports = unique(legs.flat());
+            const mean = (i: 0 | 1) => airports.reduce((sum, p) => sum + p[i], 0) / airports.length;
+            if (airports.length) rotate = [-mean(0), -mean(1)];
+        }
+
+        const visible = (p: Point) => geoDistance(p, [-rotate[0], -rotate[1]]) < Math.PI / 2;
+
+        // Great-circle arc lifted off the surface, higher for longer routes.
+        function arc(a: Point, b: Point) {
+            const lift = Math.min(geoDistance(a, b), 1.5) * 0.1;
+            const along = geoInterpolate(a, b);
+            let d = "";
+            let pen = false;
+            for (let i = 0; i <= 32; i++) {
+                const t = i / 32;
+                const p = along(t);
+                if (!visible(p)) {
+                    pen = false;
+                    continue;
+                }
+                const [x, y] = projection(p) as Point;
+                const k = 1 + Math.sin(Math.PI * t) * lift;
+                d += `${pen ? "L" : "M"}${MID + (x - MID) * k},${MID + (y - MID) * k}`;
+                pen = true;
+            }
+            return d;
+        }
+
+        function render() {
+            projection.rotate(rotate).scale(RADIUS * zoom);
+            part("sphere").setAttribute("d", path({ type: "Sphere" }) ?? "");
+            part("graticule").setAttribute("d", path(graticule) ?? "");
+            part("land").setAttribute("d", path(land) ?? "");
+            part("visited").setAttribute("d", visited.map((f) => path(f) ?? "").join(""));
+            part("routes").setAttribute("d", routes.map(([a, b]) => arc(a, b)).join(""));
+            part("airports").innerHTML = airports
+                .filter(visible)
+                .map((p) => {
+                    const [x, y] = projection(p) as Point;
+                    return `<circle cx="${x}" cy="${y}" r="3" />`;
+                })
+                .join("");
+        }
+
+        let drag: Point | null = null;
+        svg.addEventListener("pointerdown", (e) => {
+            drag = [e.clientX, e.clientY];
+            svg.setPointerCapture(e.pointerId);
+        });
+        svg.addEventListener("pointermove", (e) => {
+            if (!drag) return;
+            // degrees per screen pixel, so the point under the cursor roughly follows it
+            const k = ((180 / Math.PI) * SIZE) / (svg.clientWidth * RADIUS * zoom);
+            rotate = [
+                rotate[0] + (e.clientX - drag[0]) * k,
+                Math.max(-90, Math.min(90, rotate[1] - (e.clientY - drag[1]) * k)),
+            ];
+            drag = [e.clientX, e.clientY];
+            render();
+        });
+        const release = () => {
+            drag = null;
+        };
+        svg.addEventListener("pointerup", release);
+        svg.addEventListener("pointercancel", release);
+
+        for (const button of document.querySelectorAll<HTMLButtonElement>("[data-zoom]")) {
+            button.addEventListener("click", () => {
+                zoom = Math.max(1, Math.min(32, zoom * Number(button.dataset.zoom)));
+                render();
+            });
+        }
+
+        document.addEventListener("travels:year", (e) => {
+            select((e as CustomEvent<string>).detail);
+            render();
+        });
+
+        select("all");
+        render();
+    }
+</script>

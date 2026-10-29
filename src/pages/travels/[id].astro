@@ -1,0 +1,75 @@
+---
+import { render } from "astro:content";
+import Image from "astro/components/Image.astro";
+import TableOfContents from "../../components/TableOfContents.astro";
+import NewLayout from "../../layouts/NewLayout.astro";
+import {
+	countryName,
+	flag,
+	fmtDate,
+	getTravels,
+	travelDates,
+} from "../../utils/travels";
+
+export async function getStaticPaths() {
+	return (await getTravels()).map((travel) => ({
+		params: { id: travel.id },
+		props: { travel },
+	}));
+}
+
+const { travel } = Astro.props;
+const { trip, destination, summary, cover, legs } = travel.data;
+const { Content, headings } = await render(travel);
+const country = countryName(destination);
+---
+
+<NewLayout
+    title={`${trip} - Ricky Roy Nardson`}
+    description={summary ?? `${trip}, ${country}`}
+>
+    <div class="max-w-2xl lg:max-w-5xl mx-auto p-4 py-12">
+        <a
+            href="/travels"
+            class="text-sm text-slate-500 hover:text-slate-900 transition-colors"
+        >
+            &larr; Back to travels
+        </a>
+        <div class="mt-4 mb-8">
+            <p class="text-slate-500 text-sm tabular-nums">
+                {flag(destination)} {country} · {legs[0].date.getUTCFullYear()} · {travelDates(legs)}
+            </p>
+            <h1 class="text-3xl font-bold text-slate-900 mt-1">{trip}</h1>
+            {summary && <p class="text-slate-500 mt-2">{summary}</p>}
+        </div>
+        {cover && (
+            <Image
+                src={cover}
+                alt=""
+                loading="eager"
+                class="mb-8 w-full rounded-3xl border border-slate-200 object-cover"
+            />
+        )}
+        <div class="lg:grid lg:grid-cols-[1fr_200px] lg:gap-12">
+            <div>
+                <ol class="mb-8 divide-y divide-slate-200 rounded-2xl border border-slate-200">
+                    {legs.map((leg) => (
+                        <li class="flex items-center gap-4 px-4 py-3">
+                            <span class="w-14 shrink-0 text-sm text-slate-500 tabular-nums">{fmtDate(leg.date)}</span>
+                            <span class="flex-1 font-medium text-slate-900 tabular-nums">
+                                {leg.from} <span class="text-blue-600" aria-label="to">→</span> {leg.to}
+                            </span>
+                            <span class="text-right text-sm text-slate-500">
+                                {leg.transport}{leg.duration && ` · ${leg.duration}`}
+                            </span>
+                        </li>
+                    ))}
+                </ol>
+                <div class="prose prose-slate dark:prose-neutral dark:prose-invert max-w-none">
+                    <Content />
+                </div>
+            </div>
+            <TableOfContents headings={headings} />
+        </div>
+    </div>
+</NewLayout>
